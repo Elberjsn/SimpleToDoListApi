@@ -1,15 +1,43 @@
 server:
-  port: 8080
+  port: ${PORT}
 spring:
   profiles:
-    active: dev
+    active: ${SPRING_PROFILES_ACTIVE}
   application:
     name: SimpleToDoList
   security:
     user:
-      name: admin
-      password: admin
-      roles: ADMIN
+      name: ${SECURITY_USER_NAME}
+      password: ${SECURITY_USER_PASSWORD}
+      roles: ${SECURITY_USER_ROLES}
+  jackson:
+    date-format: ${DATE_TIME_FORMAT}
+    time-zone: ${TIME_ZONE}
+
+# API Documentation Configuration
+#springdoc:
+#  api-docs:
+#    path: /api-docs
+#  swagger-ui:
+#    path: /swagger-ui.html
+
+#  # API Metadata
+#  info:
+#    title: SimpleToDoList API
+#    description: SimpleToDoList API Documentation
+#    version: 0.0.1
+#    contact:
+#      name: Elber José
+#      email: elberjsn@gmail.com
+#      url: https://github.com/elberjsn
+#    license:
+#      name: Apache 2.0
+#      url: http://www.apache.org/licenses/LICENSE-2.0.html
+  # API Organization
+#  packages-to-scan: dev.elberjsn.todolist.controller
+#  default-produces-media-type: application/json
+#  default-consumes-media-type: application/json
+
 
 ---
 
@@ -18,15 +46,15 @@ spring:
     activate:
       on-profile: dev
   datasource:
-    url: jdbc:h2:mem:testdb
-    username: sa
-    password: password
+    url: ${DATABASE_DEV_URL}
+    username: ${DATABASE_DEV_USERNAME}
+    password: ${DATABASE_DEV_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect: ${JPA_HIBERNATE_DIALECT_DEV}
     show-sql: true
 
 ---
@@ -36,13 +64,13 @@ spring:
     activate:
       on-profile: prod
   datasource:
-    url: jdbc:postgresql://localhost:5432/todolist
-    username: root
-    password: password
+    url: ${DATABASE_PROD_URL}
+    username: ${DATABASE_PROD_USERNAME}
+    password: ${DATABASE_PROD_PASSWORD}
   jpa:
     hibernate:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: ${JPA_HIBERNATE_DIALECT_PROD}
     show-sql: true
