@@ -13,4 +13,13 @@ public enum TaskLevelSharing {
     public int getValue() {
         return value;
     }
+
+    public static TaskLevelSharing fromValue(int value) {
+        for (TaskLevelSharing status : TaskLevelSharing.values()) {
+            if (status.getValue() == value) {
+                return status;
+            }
+        }
+        return null;
+    }
 }
