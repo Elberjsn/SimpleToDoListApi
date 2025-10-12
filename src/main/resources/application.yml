@@ -2,7 +2,7 @@ server:
   port: ${PORT}
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE}
+    active: ${SPRING_PROFILES_ACTIVE:dev,prod}
   application:
     name: SimpleToDoList
   security:
@@ -17,31 +17,9 @@ spring:
     enabled: true
     locations: classpath:db/migration
     baseline-on-migrate: true
-
-# API Documentation Configuration
-#springdoc:
-#  api-docs:
-#    path: /api-docs
-#  swagger-ui:
-#    path: /swagger-ui.html
-
-#  # API Metadata
-#  info:
-#    title: SimpleToDoList API
-#    description: SimpleToDoList API Documentation
-#    version: 0.0.1
-#    contact:
-#      name: Elber José
-#      email: elberjsn@gmail.com
-#      url: https://github.com/elberjsn
-#    license:
-#      name: Apache 2.0
-#      url: http://www.apache.org/licenses/LICENSE-2.0.html
-  # API Organization
-#  packages-to-scan: dev.elberjsn.todolist.controller
-#  default-produces-media-type: application/json
-#  default-consumes-media-type: application/json
-
+    validate-on-migrate: true
+    clean-disabled: true
+    out-of-order: false
 
 ---
 
@@ -60,6 +38,8 @@ spring:
       hibernate:
         dialect: ${JPA_HIBERNATE_DIALECT_DEV}
     show-sql: true
+  flyway:
+    locations: classpath:db/migration,classpath:db/dev
 
 ---
 
@@ -78,3 +58,6 @@ spring:
       hibernate:
         dialect: ${JPA_HIBERNATE_DIALECT_PROD}
     show-sql: true
+  flyway:
+    locations: classpath:db/migration,classpath:db/test
+    clean-disabled: false
