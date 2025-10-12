@@ -5,9 +5,9 @@ import dev.elberjsn.todoapi.usercase.task.ports.TaskRepository;
 
 import java.util.Optional;
 
-public record ExistsTaskByCodeTaskImpl(TaskRepository taskRepository) implements ExistsTaskByCodeTask{
+public record ExistsTaskByCodeImpl(TaskRepository taskRepository) implements ExistsTaskByCode{
     @Override
     public Optional<Task> execute(String code) {
-        return taskRepository.existsTaskByCodeTask(code);
+        return taskRepository.existsTaskByCode(code);
     }
 }

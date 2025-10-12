@@ -13,7 +13,7 @@ public record CreateTaskImpl(TaskRepository taskRepository) implements CreateTas
     @Override
     public Task execute(RequestTask task) {
         String generatedCode = generateCode();
-        if (taskRepository.existsTaskByCodeTask(generatedCode).isPresent()){
+        if (taskRepository.existsTaskByCode(generatedCode).isPresent()){
             generatedCode = generateCode();
         }
         return taskRepository.save(new Task(null,generatedCode ,task.title(),task.description(),

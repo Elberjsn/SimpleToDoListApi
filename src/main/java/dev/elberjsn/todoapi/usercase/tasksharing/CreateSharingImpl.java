@@ -12,7 +12,7 @@ public record CreateSharingImpl(TaskSharingRepository taskSharingRepository,
                                 TaskRepository taskRepository,
                                 PersonRepository personRepository) implements CreateSharing {
     @Override
-    public TaskSharing execute(RequestTaskSharing taskSharing) {
+    public TaskSharing execute(TaskSharing taskSharing) {
         if (!taskRepository.existsTaskById(taskSharing.idTask())) {
             throw new BusinessException("Task not found");
         }
@@ -20,6 +20,9 @@ public record CreateSharingImpl(TaskSharingRepository taskSharingRepository,
             throw new BusinessException("Person not found");
         }
 
+
         return taskSharingRepository.save(taskSharing);
     }
+
+
 }

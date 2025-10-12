@@ -4,6 +4,6 @@ import dev.elberjsn.todoapi.core.domain.Task;
 
 import java.util.Optional;
 
-public interface ExistsTaskByCodeTask {
-    public Optional<Task> execute(String code);
+public interface FindTaskByPersonIdAndTaskId {
+    Optional<Task> execute(Long idPerson, Long idTask);
 }
