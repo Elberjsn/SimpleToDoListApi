@@ -7,9 +7,13 @@ import dev.elberjsn.todoapi.infrastructure.repositories.person.PersonRepositoryI
 import dev.elberjsn.todoapi.infrastructure.repositories.task.entities.TaskEntity;
 import dev.elberjsn.todoapi.infrastructure.repositories.task.mapper.TaskEntityMapper;
 import dev.elberjsn.todoapi.usercase.task.ports.TaskRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
+@Repository
 public class TaskRepositoryImpl implements TaskRepository {
 
     private final JpaTaskRepository jpaTaskRepository;
@@ -39,7 +43,13 @@ public class TaskRepositoryImpl implements TaskRepository {
     }
 
     @Override
-    public Optional<Task> findTaskByIdPerson(Long idPerson) {
+    public Optional<Task> findTaskByCode(String code) {
+        return Optional.ofNullable(jpaTaskRepository.findByCode(code).orElse(null));
+
+    }
+
+    @Override
+    public List<Task> findTaskByIdPerson(Long idPerson) {
         return jpaTaskRepository.findTaskEntitiesByPersonId(idPerson);
     }
 
