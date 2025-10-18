@@ -14,9 +14,12 @@ import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.entities.Tas
 import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.mapper.TaskSharingMapper;
 import dev.elberjsn.todoapi.usercase.tasksharing.dto.RequestTaskSharing;
 import dev.elberjsn.todoapi.usercase.tasksharing.ports.TaskSharingRepository;
+import org.springframework.stereotype.Repository;
 
+import java.util.Objects;
 import java.util.Optional;
 
+@Repository
 public class TaskSharingRepositoryImpl implements TaskSharingRepository {
 
     private final JpaTaskSharingRepository jpaTaskSharingRepository;
@@ -37,6 +40,14 @@ public class TaskSharingRepositoryImpl implements TaskSharingRepository {
         try {
             Person p = personRepository.findById(taskSharing.idPerson()).orElse(null);
             Task t = taskRepository.findTaskById(taskSharing.idTask()).orElse(null);
+
+            if (p == null || t == null){
+                throw new BusinessException("Person And Task not found");
+            }
+
+            if (!Objects.equals(t.idPerson(), p.id()) || taskSharing.level() != TaskLevelSharing.ADMIN){
+                throw new BusinessException("Person not authorized to share task");
+            }
 
             TaskSharingEntity entity = TaskSharingMapper.toEntity(taskSharing, PersonEntityMapper.toEntity(p), TaskEntityMapper.toEntity(t,null));
             TaskSharingEntity save = jpaTaskSharingRepository.save(entity);

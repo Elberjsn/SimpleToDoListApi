@@ -11,8 +11,8 @@ public interface TaskSharingRepository {
 
     void updateTaskSharing(Long id,RequestTaskSharing taskSharing);
     void deleteTaskSharingByTaskAndPerson(RequestTaskSharing taskSharing);
-
     Optional<TaskSharing> existsTaskSharingById(Long id);
-
     Optional<Task> findTaskEntitiesByIdAndPersonId(Long idTask, Long idPerson);
+
+
 }
