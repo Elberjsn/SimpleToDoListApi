@@ -5,17 +5,27 @@ import dev.elberjsn.todoapi.infrastructure.controllers.person.dtos.PersonCreateR
 import dev.elberjsn.todoapi.infrastructure.controllers.person.dtos.PersonRequestDto;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.PersonRepositoryImpl;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.mapper.PersonEntityMapper;
+import dev.elberjsn.todoapi.infrastructure.security.JwtTokenService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 @RestController
 @RequestMapping("/v1/person")
 public class PersonController {
 
     final PersonRepositoryImpl personRepository;
-    public PersonController(PersonRepositoryImpl personRepository1) {
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    final JwtTokenService jwtTokenService;
+
+    public PersonController(PersonRepositoryImpl personRepository1, AuthenticationManagerBuilder authenticationManagerBuilder, JwtTokenService jwtTokenService) {
         this.personRepository = personRepository1;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.jwtTokenService = jwtTokenService;
     }
 
     @PostMapping("/create")
@@ -53,11 +63,16 @@ public class PersonController {
 
     @PostMapping("/login")
     public ResponseEntity<PersonRequestDto> loginPerson(@RequestBody String email, @RequestBody String password) {
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(
+                new UsernamePasswordAuthenticationToken(email, password)
+        );
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtTokenService.generateToken(email);
         boolean login = personRepository.login(email, password);
         if (!login){
             return ResponseEntity.status(HttpServletResponse.SC_UNAUTHORIZED).build();
         }
-        return ResponseEntity.status(HttpServletResponse.SC_ACCEPTED).build();
+        return ResponseEntity.status(HttpServletResponse.SC_OK).header("Authorization", "Bearer " + jwt).build();
     }
 
 
