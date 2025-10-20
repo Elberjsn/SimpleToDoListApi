@@ -5,7 +5,7 @@ import dev.elberjsn.todoapi.core.exceptions.BusinessException;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.entities.PersonEntity;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.mapper.PersonEntityMapper;
 import dev.elberjsn.todoapi.infrastructure.security.BCryptPasswordEncoder;
-import dev.elberjsn.todoapi.usercase.person.ports.PersonRepository;
+import dev.elberjsn.todoapi.infrastructure.usercase.person.ports.PersonRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

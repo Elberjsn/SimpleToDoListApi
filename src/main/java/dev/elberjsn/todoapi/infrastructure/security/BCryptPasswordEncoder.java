@@ -1,6 +1,6 @@
 package dev.elberjsn.todoapi.infrastructure.security;
 
-import dev.elberjsn.todoapi.usercase.person.ports.PasswordEncoder;
+import dev.elberjsn.todoapi.infrastructure.usercase.person.ports.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component

@@ -9,7 +9,7 @@ import dev.elberjsn.todoapi.infrastructure.repositories.person.PersonRepositoryI
 import dev.elberjsn.todoapi.infrastructure.repositories.task.TaskRepositoryImpl;
 import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.TaskSharingRepositoryImpl;
 import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.mapper.TaskSharingMapper;
-import dev.elberjsn.todoapi.usercase.tasksharing.dto.RequestTaskSharing;
+import dev.elberjsn.todoapi.infrastructure.usercase.tasksharing.dto.RequestTaskSharing;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

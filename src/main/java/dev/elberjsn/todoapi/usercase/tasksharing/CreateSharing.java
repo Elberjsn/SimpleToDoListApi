@@ -1,7 +1,0 @@
-package dev.elberjsn.todoapi.usercase.tasksharing;
-
-import dev.elberjsn.todoapi.core.domain.TaskSharing;
-
-public interface CreateSharing {
-    public TaskSharing execute(TaskSharing taskSharing);
-}

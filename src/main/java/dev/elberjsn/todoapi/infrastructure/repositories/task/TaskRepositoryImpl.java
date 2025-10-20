@@ -6,9 +6,8 @@ import dev.elberjsn.todoapi.core.exceptions.BusinessException;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.PersonRepositoryImpl;
 import dev.elberjsn.todoapi.infrastructure.repositories.task.entities.TaskEntity;
 import dev.elberjsn.todoapi.infrastructure.repositories.task.mapper.TaskEntityMapper;
-import dev.elberjsn.todoapi.usercase.task.ports.TaskRepository;
+import dev.elberjsn.todoapi.infrastructure.usercase.task.ports.TaskRepository;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;

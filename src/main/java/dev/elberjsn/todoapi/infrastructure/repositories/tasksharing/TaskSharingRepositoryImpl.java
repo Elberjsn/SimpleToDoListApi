@@ -8,12 +8,11 @@ import dev.elberjsn.todoapi.core.exceptions.BusinessException;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.PersonRepositoryImpl;
 import dev.elberjsn.todoapi.infrastructure.repositories.person.mapper.PersonEntityMapper;
 import dev.elberjsn.todoapi.infrastructure.repositories.task.TaskRepositoryImpl;
-import dev.elberjsn.todoapi.infrastructure.repositories.task.entities.TaskEntity;
 import dev.elberjsn.todoapi.infrastructure.repositories.task.mapper.TaskEntityMapper;
 import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.entities.TaskSharingEntity;
 import dev.elberjsn.todoapi.infrastructure.repositories.tasksharing.mapper.TaskSharingMapper;
-import dev.elberjsn.todoapi.usercase.tasksharing.dto.RequestTaskSharing;
-import dev.elberjsn.todoapi.usercase.tasksharing.ports.TaskSharingRepository;
+import dev.elberjsn.todoapi.infrastructure.usercase.tasksharing.dto.RequestTaskSharing;
+import dev.elberjsn.todoapi.infrastructure.usercase.tasksharing.ports.TaskSharingRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Objects;
